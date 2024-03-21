@@ -1,0 +1,50 @@
+{
+  "name": "thrive-together",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.0.18",
+    "@chakra-ui/react": "^2.5.5",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@hookform/resolvers": "^2.9.11",
+    "@tanstack/react-query": "^4.29.5",
+    "@tanstack/react-query-devtools": "^4.29.6",
+    "@types/file-saver": "^2.0.5",
+    "axios": "^1.4.0",
+    "chakra-react-select": "^4.7.0",
+    "file-saver": "^2.0.5",
+    "framer-motion": "^10.11.6",
+    "jszip": "^3.10.1",
+    "jwt-decode": "^3.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "7.43",
+    "react-icons": "^4.11.0",
+    "react-particles": "^2.9.3",
+    "react-pdf": "^6.2.2",
+    "react-router-dom": "^6.10.0",
+    "react-select": "^5.7.4",
+    "react-tsparticles": "^2.9.3",
+    "react-type-animation": "^3.0.1",
+    "tsparticles": "^2.9.3",
+    "xlsx": "^0.18.5",
+    "zod": "^3.20.6",
+    "zustand": "^4.3.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@types/react-pdf": "^6.2.0",
+    "@vitejs/plugin-react": "^3.1.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0"
+  }
+}
