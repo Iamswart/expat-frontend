@@ -6,28 +6,24 @@ const LoginPage = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   return (
-    <Container maxW="container.xl" p={0}>
+    <Container maxW="container.xxl" p={0}>
       <Flex
         h={{ base: "auto", md: "100vh" }}
-        direction={{ base: "column", md: "row" }} 
-        justify={{ base: "center", md: "space-between" }} 
-        align="center" 
+        direction={{ base: "column", md: "row" }}
+        justify={{ base: "center", md: "space-between" }}
+        align="center"
       >
         <Box
           w={{ base: "full", md: "50%" }}
           h="100vh"
           overflowY="auto"
-          p={{ base: 4, md: 0 }} 
+          p={{ base: 4, md: 0 }}
         >
           <LoginForm />
         </Box>
 
-        {!isMobile && ( 
-          <Box
-            w={{ md: "50%" }}
-            h="100vh"
-            overflowY="hidden"
-          >
+        {!isMobile && (
+          <Box w={{ md: "50%" }} h="100vh" overflowY="hidden">
             <HomeImage />
           </Box>
         )}

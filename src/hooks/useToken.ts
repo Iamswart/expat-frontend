@@ -1,4 +1,3 @@
-// hooks/useToken.ts
 import jwtDecode from 'jwt-decode';
 import { useAuthStore } from "../store";
 

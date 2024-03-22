@@ -96,7 +96,7 @@ const LoginForm = () => {
   return (
     <VStack w="full" h="full" p={10} spacing={10} alignItems="flex-start">
       <Text alignSelf="flex-end">
-        New to Brillo Connectz?{" "}
+        New to Expat Swap?{" "}
         <Link as={ReactRouterLink} to="/register" color="#3048C1">
           Sign up here
         </Link>
@@ -104,7 +104,7 @@ const LoginForm = () => {
       <VStack spacing={10} alignItems="flex-start">
         <VStack spacing={1} alignItems="flex-start">
           <Heading size="xl">Log in</Heading>
-          <Text>Welcome Back! Log in and continue your journey in the realm of sports enthusiasts.</Text>
+          <Text>Welcome Back! Log in and continue your journey.</Text>
         </VStack>
       </VStack>
       <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>

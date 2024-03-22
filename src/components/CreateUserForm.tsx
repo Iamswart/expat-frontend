@@ -13,7 +13,7 @@ import {
   Text,
   VStack,
   useBreakpointValue,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -45,9 +45,12 @@ const passwordSchema = z
   );
 
 export const registerSchema = z.object({
-  userName: z
+  firstname: z
     .string()
-    .min(3, { message: "User Name must be 3 or more characters long" }),
+    .min(3, { message: "First Name must be 3 or more characters long" }),
+  lastname: z
+    .string()
+    .min(3, { message: "Last Name must be 3 or more characters long" }),
   email: z.string().email({ message: "Invalid email address" }),
   phone: z
     .string()
@@ -55,6 +58,10 @@ export const registerSchema = z.object({
     .regex(/^[0-9]{7,12}$/, "Invalid phone number format")
     .min(7, "Phone number must be at least 7 digits")
     .max(12, "Phone number must be no more than 12 digits"),
+  dateOfBirth: z.string().refine((value) => /\d{4}-\d{2}-\d{2}/.test(value), {
+    message: "Date of Birth is required in YYYY-MM-DD format",
+    path: ["dateOfBirth"],
+  }),
   password: passwordSchema,
 });
 
@@ -79,14 +86,18 @@ const CreateUserForm = () => {
   const registerMutation = useRegister();
 
   const onSubmit = (data: RegisterFormData) => {
-    registerMutation.mutate(data, {
+    const submittedData = {
+      ...data,
+      dateOfBirth: new Date(data.dateOfBirth),
+    };
+    registerMutation.mutate(submittedData, {
       onSuccess: (response) => {
         const { accessToken, refreshToken } = response;
         const authStore = useAuthStore.getState();
         authStore.setAccessToken(accessToken);
         authStore.setRefreshToken(refreshToken);
 
-        navigate("/welcome", { state: { email: data.email } });
+        navigate("/", { state: { email: data.email } });
       },
       onError: (error: any) => {
         const errorMessage =
@@ -114,25 +125,37 @@ const CreateUserForm = () => {
         </Text>
         <VStack spacing={1} alignItems="flex-start">
           <Heading size="xl">Create Account</Heading>
-          <Text>
-          Unlock Your New Community. Create an account and dive into a world where sports passion unites.
-          </Text>
+          <Text>Unlock Your New Community. Create an account and dive in.</Text>
         </VStack>
       </VStack>
       <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
         <VStack spacing={4} alignItems="flex-start" w="full">
-          <FormControl isInvalid={!!errors.userName}>
+          <FormControl isInvalid={!!errors.firstname}>
             <InputGroup>
               <InputLeftElement pointerEvents="none">
                 <Icon as={FaUserAlt} />
               </InputLeftElement>
               <Input
-                id="user-name"
-                placeholder="Username"
-                {...register("userName")}
+                id="firstname"
+                placeholder="First name"
+                {...register("firstname")}
               />
             </InputGroup>
-            <FormErrorMessage>{errors.userName?.message}</FormErrorMessage>
+            <FormErrorMessage>{errors.firstname?.message}</FormErrorMessage>
+          </FormControl>
+
+          <FormControl isInvalid={!!errors.lastname}>
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                <Icon as={FaUserAlt} />
+              </InputLeftElement>
+              <Input
+                id="lastname"
+                placeholder="Last name"
+                {...register("lastname")}
+              />
+            </InputGroup>
+            <FormErrorMessage>{errors.lastname?.message}</FormErrorMessage>
           </FormControl>
 
           <FormControl isInvalid={!!errors.email}>
@@ -166,6 +189,12 @@ const CreateUserForm = () => {
             <FormErrorMessage>{errors.phone?.message}</FormErrorMessage>
           </FormControl>
 
+          <FormControl isInvalid={!!errors.dateOfBirth}>
+            <Input placeholder="Date of Birth" type="date" id="dateOfBirth" {...register("dateOfBirth")} />
+            <FormErrorMessage>{errors.dateOfBirth?.message}</FormErrorMessage>
+            <FormHelperText>Enter your date of birth.</FormHelperText>
+          </FormControl>
+
           <FormControl isInvalid={!!errors.password}>
             <InputGroup>
               <InputLeftElement pointerEvents="none">
@@ -196,7 +225,7 @@ const CreateUserForm = () => {
           type="submit"
           isLoading={registerMutation.isLoading}
           _hover={{
-            bgColor:"#3048C1"
+            bgColor: "#3048C1",
           }}
         >
           Create Account

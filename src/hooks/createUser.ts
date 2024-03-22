@@ -4,10 +4,12 @@ import APIClient from "../services/api-client";
 const authApiClient = new APIClient("/auth/register");
 
 export interface RegisterInput {
-  userName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   phone: string;
   password: string;
+  dateOfBirth: Date;
 }
 
 interface RegisterResponse {
