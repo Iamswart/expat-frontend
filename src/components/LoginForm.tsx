@@ -10,7 +10,7 @@ import {
   Link,
   Text,
   VStack,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -110,12 +110,21 @@ const LoginForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
         <VStack spacing={4} alignItems="flex-start" w="full">
           <FormControl isInvalid={!!errors.login}>
-          <Input id="login" placeholder="Email or Phone" {...register("login")} />
+            <Input
+              id="login"
+              placeholder="Email or Phone"
+              {...register("login")}
+            />
             <FormErrorMessage>{errors.login?.message}</FormErrorMessage>
           </FormControl>
           <FormControl isInvalid={!!errors.password}>
             <InputGroup size="md">
-            <Input id="password" type={showPassword ? "text" : "password"} {...register("password")} placeholder="Password" />
+              <Input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                {...register("password")}
+                placeholder="Password"
+              />
               <InputRightElement width="4.5rem">
                 <Button
                   h="1.75rem"
@@ -129,13 +138,7 @@ const LoginForm = () => {
             <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
         </VStack>
-        <VStack mt={8}>
-          <Text color={"#5F34F5"} alignSelf="flex-end">
-            <Link as={ReactRouterLink} to={"/forgot-password"}>
-              Forgot password?
-            </Link>
-          </Text>
-
+        <VStack mt={4}>
           <Button
             w="full"
             paddingY={5}
